@@ -20,6 +20,9 @@ const app = new Frog({
   },
 });
 
+const enkryptLink =
+  'https://chrome.google.com/webstore/detail/enkrypt/kkpllkodjeloidieedojogacfhpaihoh';
+
 const questions = [
   {
     question: 'Which wallet do you hold your crypto in?',
@@ -31,9 +34,9 @@ const questions = [
   {
     question: 'Do you use DeFi lending?',
     answers: [
-      { answer: 'Always', weight: '0' },
-      { answer: 'Never', weight: '1' },
-      { answer: 'Only Supply', weight: '2' },
+      { answer: 'APR >100%', weight: '0' },
+      { answer: 'Depends', weight: '1' },
+      { answer: 'Wut', weight: '2' },
     ],
   },
   {
@@ -53,44 +56,47 @@ const questions = [
     ],
   },
   {
-    question: 'Are you currently staking any crypto?',
+    question: 'Do you participate in liquidity pools?',
     answers: [
-      { answer: 'Maybe?', weight: '0' },
-      { answer: 'No', weight: '1' },
-      { answer: 'Yes', weight: '2' },
+      { answer: 'Huh?', weight: '0' },
+      { answer: 'Nahh', weight: '1' },
+      { answer: 'Yeah', weight: '2' },
     ],
   },
 ];
+
 const founders = [
   {
     name: 'Sam Bankman-Fried',
-    desc: "It's giving fun to be around.",
-    crypto: 'crypto',
+    desc: "It's giving we could be cellies.",
+    enkryptDesc:
+      'And he/you should have used a self custody wallet like Enkrypt!',
   },
   {
     name: 'Do Kwon',
     desc: 'Not afraid to embrace your silly side!',
-    crypto: 'crypto',
+    enkryptDesc:
+      'And he/you should have used a self custody wallet like Enkrypt!',
   },
   {
     name: 'CZ',
     desc: 'You adapt to challenges and are not afraid to try new things.',
-    crypto: 'BNB',
+    enkryptDesc:
+      "And he/you'd use a self custody multichain wallet like Enkrypt!",
   },
   {
     name: 'Vitalik Buterin',
     desc: 'A reliable leader, the people love you!',
-    crypto: 'Ethereum',
-    enkryptDesc: "And he/you'd use a self custody wallet like Enkrypt!",
+    enkryptDesc:
+      "And he/you'd use a self custody multichain wallet like Enkrypt!",
   },
   {
     name: 'Satoshi Nakamoto',
-    desc: 'Basically very based.',
-    crypto: 'Bitcoin',
+    desc: 'Very calculated, very based.',
+    enkryptDesc:
+      "And he/you'd use a self custody multichain wallet like Enkrypt!",
   },
 ];
-const enkryptDesc =
-  'Easily manage your {crypto} with our multichain browser wallet Enkrypt!';
 
 let storedAnswers: number[] = [];
 let questionNum = 0;
@@ -116,10 +122,12 @@ app.frame('/', c => {
     ],
   });
 });
+
 function incrementQuestion(value: string) {
   questionNum++;
   if (value !== 'reset') storedAnswers.push(parseInt(value));
 }
+
 app.frame('/questions', c => {
   const { buttonValue } = c;
   if (buttonValue === 'reset') {
@@ -163,7 +171,7 @@ app.frame('/result', c => {
   }
   const result = calculateResult();
   const founder = founders[result];
-  const founderImg = `${founder.name.replace(' ', '-')}.png`;
+  const founderImg = `/images/${founder.name.replace(' ', '-')}.png`;
   return c.res({
     image: (
       <div style={{ ...container, flexDirection: 'row' }}>
@@ -174,12 +182,7 @@ app.frame('/result', c => {
           height={'100%'}
           style={bg}
         />
-        <img
-          src={`/images/${founderImg}`}
-          width={380}
-          height={380}
-          alt={`${founder.name}`}
-        />
+        <img src={founderImg} width={380} height={380} alt={founder.name} />
         <div
           style={{
             display: 'flex',
@@ -190,19 +193,14 @@ app.frame('/result', c => {
             width: '60%',
           }}
         >
-          <div style={{ ...fontStyle, fontSize: 45 }}>{`You are ${
-            founder.name
-          }.\n${founder.desc}\n${enkryptDesc.replace(
-            '{crypto}',
-            founder.crypto
-          )}`}</div>
+          <div
+            style={{ ...fontStyle, fontSize: 45 }}
+          >{`You are ${founder.name}.\n${founder.desc}\n${founder.enkryptDesc}`}</div>
         </div>
       </div>
     ),
     intents: [
-      <Button.Link href='https://chrome.google.com/webstore/detail/enkrypt/kkpllkodjeloidieedojogacfhpaihoh'>
-        Download Enkrypt
-      </Button.Link>,
+      <Button.Link href={enkryptLink}>Download Enkrypt</Button.Link>,
       <Button.Reset>Start Over</Button.Reset>,
     ],
   });
