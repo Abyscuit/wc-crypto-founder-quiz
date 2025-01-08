@@ -25,8 +25,7 @@ const questions = [
     question: 'Which wallet do you hold your crypto in?',
     answers: [
       { answer: 'Exchange', weight: '0' },
-      { answer: 'Private', weight: '1' },
-      { answer: 'Hardware', weight: '2' },
+      { answer: 'Self-Custody', weight: '1' },
     ],
   },
   {
@@ -40,8 +39,8 @@ const questions = [
   {
     question: 'Which best describes crypto?',
     answers: [
-      { answer: 'Black Box', weight: '0' },
-      { answer: 'Money', weight: '1' },
+      { answer: 'Depends', weight: '0' },
+      { answer: 'Private', weight: '1' },
       { answer: 'Transparent', weight: '2' },
     ],
   },
@@ -82,6 +81,7 @@ const founders = [
     name: 'Vitalik Buterin',
     desc: 'A reliable leader, the people love you!',
     crypto: 'Ethereum',
+    enkryptDesc: "And he/you'd use a self custody wallet like Enkrypt!",
   },
   {
     name: 'Satoshi Nakamoto',
@@ -129,7 +129,6 @@ app.frame('/questions', c => {
   const lastQuestion = questionNum === questions.length - 1;
   const linkAction = lastQuestion ? '/result' : '';
   const currentQuestion = questions[questionNum];
-  const [answer1, answer2, answer3] = currentQuestion.answers;
   return c.res({
     image: (
       <div style={container}>
@@ -145,15 +144,13 @@ app.frame('/questions', c => {
       </div>
     ),
     intents: [
-      <Button value={answer1.weight} action={linkAction}>
-        {answer1.answer}
-      </Button>,
-      <Button value={answer2.weight} action={linkAction}>
-        {answer2.answer}
-      </Button>,
-      <Button value={answer3.weight} action={linkAction}>
-        {answer3.answer}
-      </Button>,
+      ...currentQuestion.answers.map(answer => {
+        return (
+          <Button value={answer.weight} action={linkAction}>
+            {answer.answer}
+          </Button>
+        );
+      }),
       <Button.Reset>Start Over</Button.Reset>,
     ],
   });
