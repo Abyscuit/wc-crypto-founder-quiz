@@ -12,6 +12,7 @@ export const fontStyle = {
   marginTop: 30,
   padding: '0 120px',
   whiteSpace: 'pre-wrap',
+  textShadow: '-2px 0 black, 0 2px black, 2px 0 black, 0 -2px black',
 };
 
 export const container = {

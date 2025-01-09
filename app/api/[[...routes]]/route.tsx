@@ -98,7 +98,7 @@ const founders = [
   },
 ];
 
-let storedAnswers: number[] = [];
+const storedAnswers: number[] = [];
 let questionNum = 0;
 
 app.frame('/', c => {
@@ -107,7 +107,7 @@ app.frame('/', c => {
       <div style={container}>
         <img
           alt='background'
-          src='/background.png'
+          src='/intro-background.png'
           width={'100%'}
           height={'100%'}
           style={bg}
@@ -148,7 +148,9 @@ app.frame('/questions', c => {
           style={bg}
         />
         {incrementQuestion(buttonValue ?? '')}
-        <div style={fontStyle}>{currentQuestion.question}</div>
+        <div style={{ ...fontStyle, textShadow: '0px 0px' }}>
+          {currentQuestion.question}
+        </div>
       </div>
     ),
     intents: [
@@ -194,7 +196,7 @@ app.frame('/result', c => {
           }}
         >
           <div
-            style={{ ...fontStyle, fontSize: 45 }}
+            style={{ ...fontStyle, fontSize: 45, textShadow: '0px 0px' }}
           >{`You are ${founder.name}.\n${founder.desc}\n${founder.enkryptDesc}`}</div>
         </div>
       </div>
