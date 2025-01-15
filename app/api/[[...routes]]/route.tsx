@@ -35,7 +35,7 @@ const questions = [
     question: 'Do you use DeFi lending?',
     answers: [
       { answer: 'APR >100%', weight: '0' },
-      { answer: 'Depends', weight: '1' },
+      { answer: 'Yezzir', weight: '1' },
       { answer: 'Wut', weight: '2' },
     ],
   },
@@ -74,25 +74,25 @@ const founders = [
   },
   {
     name: 'Do Kwon',
-    desc: 'Not afraid to embrace your silly side!',
+    desc: 'Not afraid to try new things!',
     enkryptDesc:
       'And he/you should have used a self custody wallet like Enkrypt!',
   },
   {
     name: 'CZ',
-    desc: 'You adapt to challenges and are not afraid to try new things.',
+    desc: "You're quick to act and overcome any challenges.",
     enkryptDesc:
       "And he/you'd use a self custody multichain wallet like Enkrypt!",
   },
   {
     name: 'Vitalik Buterin',
-    desc: 'A reliable leader, the people love you!',
+    desc: "You used to play WoW, now you're an onchain hero and animal lover.",
     enkryptDesc:
       "And he/you'd use a self custody multichain wallet like Enkrypt!",
   },
   {
     name: 'Satoshi Nakamoto',
-    desc: 'Very calculated, very based.',
+    desc: 'Very calculated. Very based.',
     enkryptDesc:
       "And he/you'd use a self custody multichain wallet like Enkrypt!",
   },
